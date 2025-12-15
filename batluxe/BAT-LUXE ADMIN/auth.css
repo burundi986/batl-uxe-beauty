@@ -1,0 +1,311 @@
+/* Admin Login Page - Updated to Match Admin Dashboard */
+:root {
+    --admin-primary: #e75480;
+    --admin-primary-hover: #d4456f;
+    --admin-secondary: #2c3e50;
+    --admin-light: #f8f9fa;
+    --admin-dark: #343a40;
+    --admin-border: #dee2e6;
+    --admin-success: #28a745;
+    --admin-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    --admin-transition: all 0.3s ease;
+    --admin-border-radius: 8px;
+    --admin-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--admin-gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="%23ffffff10" d="M0,0L1000,0L1000,1000L0,1000Z" /></svg>');
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(20px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+.admin-container {
+    width: 100%;
+    max-width: 450px;
+    z-index: 1;
+}
+
+/* Login Card */
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--admin-shadow);
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.login-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo/Brand */
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login-header h1 {
+    font-size: 2.5rem;
+    color: var(--admin-primary);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.login-header h1 span {
+    color: #d4af37;
+}
+
+.login-header p {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.admin-title {
+    font-size: 1.8rem;
+    color: var(--admin-secondary);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.admin-sub {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Form Styles */
+#adminLoginForm {
+    margin-top: 20px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--admin-dark);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--admin-border);
+    border-radius: var(--admin-border-radius);
+    transition: var(--admin-transition);
+    overflow: hidden;
+    background: var(--admin-light);
+}
+
+.input-box:focus-within {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 0.2rem rgba(231, 84, 128, 0.25);
+}
+
+.input-box i {
+    padding: 0 15px;
+    color: #6c757d;
+    font-size: 1.1rem;
+    min-width: 45px;
+}
+
+.input-box input {
+    flex: 1;
+    border: none;
+    padding: 15px 15px 15px 0;
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+    color: var(--admin-dark);
+}
+
+.input-box input::placeholder {
+    color: #adb5bd;
+}
+
+/* Login Button */
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--admin-primary);
+    color: white;
+    border: none;
+    border-radius: var(--admin-border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--admin-transition);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-btn:hover:not(:disabled) {
+    background: var(--admin-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 84, 128, 0.3);
+}
+
+.login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-btn i {
+    font-size: 1.1rem;
+}
+
+/* Error Message */
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: var(--admin-border-radius);
+    font-size: 0.9rem;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading Spinner */
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Success Message */
+.success-message {
+    color: var(--admin-success);
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(40, 167, 69, 0.1);
+    border-radius: var(--admin-border-radius);
+    font-size: 0.9rem;
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+    
+    .login-header h1 {
+        font-size: 2rem;
+    }
+    
+    .admin-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.password-toggle:hover {
+    color: var(--admin-primary);
+}
+
+/* Remember Me Checkbox */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.remember-me input {
+    margin-right: 8px;
+}
+
+/* Forgot Password */
+.forgot-password {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forgot-password a {
+    color: var(--admin-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--admin-transition);
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+    color: var(--admin-primary-hover);
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - BatLuxe Beauty</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <div class="login-card">
+            <!-- Brand Logo/Header -->
+            <div class="login-header">
+                <h1>Bat<span>Luxe</span> Beauty</h1>
+                <p>Premium Beauty Products</p>
+            </div>
+
+            <h2 class="admin-title">Admin Login</h2>
+            <p class="admin-sub">Access the BatLuxe Beauty Control Panel</p>
+
+            <form id="adminLoginForm">
+                <div class="input-group">
+                    <label for="adminEmail">Email Address</label>
+                    <div class="input-box">
+                        <i class="fas fa-user"></i>
+                        <input type="email" id="adminEmail" name="email" placeholder="admin@batluxe.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="adminPassword">Password</label>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="adminPassword" name="password" placeholder="••••••••" required>
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span id="btnText">Login to Dashboard</span>
+                    <div class="spinner" id="loginSpinner"></div>
+                </button>
+<!-- 
+                <div class="forgot-password">
+                    <a href="#">Forgot your password?</a>
+                </div> -->
+
+                <p class="error-message" id="adminError">
+                    Invalid email or password!
+                </p>
+
+                <div class="success-message" id="loginSuccess">
+                    Login successful! Redirecting...
+                </div>
+            </form>
+
+            <!-- Demo Credentials -->
+            <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 0.85rem; color: #6c757d;">
+                <p style="margin-bottom: 8px; font-weight: 600; color: #495057;">Demo Credentials:</p>
+                <p style="margin: 5px 0;"><strong>Email:</strong> admin@batluxe.com</p>
+                <p style="margin: 5px 0;"><strong>Password:</strong> admin123</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin Login Script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const loginForm = document.getElementById('adminLoginForm');
+            const adminEmail = document.getElementById('adminEmail');
+            const adminPassword = document.getElementById('adminPassword');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginSpinner = document.getElementById('loginSpinner');
+            const btnText = document.getElementById('btnText');
+            const adminError = document.getElementById('adminError');
+            const loginSuccess = document.getElementById('loginSuccess');
+            const rememberMe = document.getElementById('rememberMe');
+
+            // Valid credentials (in production, this should be server-side)
+            const VALID_CREDENTIALS = {
+                email: 'Batluxebeauty@gmail.com',
+                password: 'Abike2215'
+            };
+
+            // Load saved credentials if "Remember me" was checked
+            loadSavedCredentials();
+
+            // Password toggle visibility
+            passwordToggle.addEventListener('click', function() {
+                const type = adminPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                adminPassword.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+
+            // Form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const email = adminEmail.value.trim();
+                const password = adminPassword.value;
+                
+                // Hide previous messages
+                hideMessages();
+                
+                // Basic validation
+                if (!email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                if (!isValidEmail(email)) {
+                    showError('Please enter a valid email address');
+                    return;
+                }
+                
+                // Show loading state
+                loginBtn.disabled = true;
+                btnText.textContent = 'Authenticating...';
+                loginSpinner.style.display = 'block';
+                
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Check credentials
+                if (email === VALID_CREDENTIALS.email && password === VALID_CREDENTIALS.password) {
+                    // Save credentials if "Remember me" is checked
+                    if (rememberMe.checked) {
+                        saveCredentials(email, password);
+                    } else {
+                        clearSavedCredentials();
+                    }
+                    
+                    // Show success message
+                    loginSuccess.style.display = 'block';
+                    btnText.textContent = 'Login Successful!';
+                    
+                    // Redirect to admin dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        window.location.href = 'ADMIN-DASHBOARD.HTML';
+                    }, 1500);
+                    
+                } else {
+                    // Invalid credentials
+                    showError('Invalid email or password');
+                    resetButton();
+                }
+            });
+
+            // Save credentials to localStorage
+            function saveCredentials(email, password) {
+                try {
+                    const credentials = {
+                        email: email,
+                        password: password,
+                        timestamp: Date.now()
+                    };
+                    localStorage.setItem('batluxe_admin_credentials', JSON.stringify(credentials));
+                } catch (e) {
+                    console.error('Error saving credentials:', e);
+                }
+            }
+
+            // Load saved credentials
+            function loadSavedCredentials() {
+                try {
+                    const saved = localStorage.getItem('batluxe_admin_credentials');
+                    if (saved) {
+                        const credentials = JSON.parse(saved);
+                        // Only auto-fill if saved within last 30 days
+                        if (Date.now() - credentials.timestamp < 30 * 24 * 60 * 60 * 1000) {
+                            adminEmail.value = credentials.email;
+                            adminPassword.value = credentials.password;
+                            rememberMe.checked = true;
+                        } else {
+                            clearSavedCredentials();
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error loading credentials:', e);
+                }
+            }
+
+            // Clear saved credentials
+            function clearSavedCredentials() {
+                localStorage.removeItem('batluxe_admin_credentials');
+            }
+
+            // Show error message
+            function showError(message) {
+                adminError.textContent = message;
+                adminError.style.display = 'block';
+                
+                // Shake animation
+                loginForm.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    loginForm.style.animation = '';
+                }, 500);
+            }
+
+            // Hide all messages
+            function hideMessages() {
+                adminError.style.display = 'none';
+                loginSuccess.style.display = 'none';
+            }
+
+            // Reset button state
+            function resetButton() {
+                loginBtn.disabled = false;
+                btnText.textContent = 'Login to Dashboard';
+                loginSpinner.style.display = 'none';
+            }
+
+            // Email validation
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            // Add shake animation for errors
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Auto-focus email field on page load
+            adminEmail.focus();
+
+            // Clear error when user starts typing
+            adminEmail.addEventListener('input', hideMessages);
+            adminPassword.addEventListener('input', hideMessages);
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl + Enter to submit
+                if (e.ctrlKey && e.key === 'Enter') {
+                    loginForm.submit();
+                }
+                
+                // Escape to clear form
+                if (e.key === 'Escape') {
+                    loginForm.reset();
+                    adminEmail.focus();
+                }
+            });
+
+            // Form input validation on blur
+            adminEmail.addEventListener('blur', function() {
+                if (this.value && !isValidEmail(this.value)) {
+                    showError('Please enter a valid email address');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

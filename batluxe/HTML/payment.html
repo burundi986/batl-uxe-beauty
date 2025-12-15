@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment - BatLuxe Beauty</title>
+    <link rel="stylesheet" href="../CSS/payment.css">
+    <script src="../JAVA SCRIPT/payment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Bat<span>Luxe</span> Beauty</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html">My Account</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </a>
+                    <a href="wishlist.html" class="wishlist-icon">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="profile.html" class="user-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+  
+
+    <!-- Payment Section -->
+    <section class="payment-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Secure Payment</h1>
+                <p>Complete your purchase with confidence</p>
+            </div>
+
+            <div class="payment-container">
+                <!-- Payment Main Section -->
+                <main class="payment-main">
+                    <!-- Payment Methods -->
+                    <section class="payment-methods">
+                        <h2 class="section-title">Select Payment Method</h2>
+                        <div class="payment-options">
+                            <div class="payment-option selected" data-method="card">
+                                <div class="payment-icon">
+                                    <i class="far fa-credit-card"></i>
+                                </div>
+                                <div class="payment-name">Credit/Debit Card</div>
+                                <div class="payment-description">Pay with Visa, Mastercard, or American Express</div>
+                            </div>
+                            <div class="payment-option" data-method="paypal">
+                                <div class="payment-icon">
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                                <div class="payment-name">PayPal</div>
+                                <div class="payment-description">Fast and secure payment with PayPal</div>
+                            </div>
+                            <div class="payment-option" data-method="applepay">
+                                <div class="payment-icon">
+                                    <i class="fab fa-apple-pay"></i>
+                                </div>
+                                <div class="payment-name">Apple Pay</div>
+                                <div class="payment-description">Pay with your Apple device</div>
+                            </div>
+                            <div class="payment-option" data-method="googlepay">
+                                <div class="payment-icon">
+                                    <i class="fab fa-google-pay"></i>
+                                </div>
+                                <div class="payment-name">Google Pay</div>
+                                <div class="payment-description">Quick payment with Google Pay</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Credit Card Form -->
+                    <section class="card-form" id="card-form">
+                        <h2 class="section-title">Card Details</h2>
+                        
+                        <!-- Card Preview -->
+                        <div class="card-preview">
+                            <div class="card-chip"></div>
+                            <div class="card-number" id="card-number-preview">•••• •••• •••• ••••</div>
+                            <div class="card-details">
+                                <div class="card-holder">
+                                    <div class="card-label">CARD HOLDER</div>
+                                    <div class="card-value" id="card-holder-preview">YOUR NAME</div>
+                                </div>
+                                <div class="card-expiry">
+                                    <div class="card-label">EXPIRES</div>
+                                    <div class="card-value" id="card-expiry-preview">MM/YY</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Form -->
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <div class="input-with-icon">
+                                <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
+                                <i class="far fa-credit-card"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="card-holder">Card Holder Name</label>
+                            <input type="text" id="card-holder" class="form-control" placeholder="John Smith">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiration Date</label>
+                                <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvc">CVC</label>
+                                <div class="input-with-icon">
+                                    <input type="text" id="card-cvc" class="form-control" placeholder="123" maxlength="4">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Billing Address -->
+                    <section class="billing-address">
+                        <h2 class="section-title">Billing Address</h2>
+                        
+                        <div class="address-toggle">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="same-as-shipping" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>Same as shipping address</span>
+                        </div>
+
+                        <div id="billing-address-form" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="billing-first-name">First Name</label>
+                                    <input type="text" id="billing-first-name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-last-name">Last Name</label>
+                                    <input type="text" id="billing-last-name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="billing-address">Address</label>
+                                <input type="text" id="billing-address" class="form-control">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="billing-city">City</label>
+                                    <input type="text" id="billing-city" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-postcode">Postcode</label>
+                                    <input type="text" id="billing-postcode" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="billing-country">Country</label>
+                                <select id="billing-country" class="form-control">
+                                    <option value="GB">United Kingdom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <!-- Order Summary Sidebar -->
+                <aside class="order-summary">
+                    <h2 class="summary-title">Order Summary</h2>
+                    
+                    <div class="summary-items">
+                        <!-- Item 1 -->
+                        <div class="summary-item">
+                            <div class="item-image">
+                                <img src="https://images.unsplash.com/photo-1583494939362-4c6b63b29e76?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="BatLuxe Feline Lashes">
+                            </div>
+                            <div class="item-info">
+                                <div class="item-name">BatLuxe Feline Lashes</div>
+                                <div class="item-details">Quantity: 2 | Color: Natural Black</div>
+                            </div>
+                            <div class="item-price">£49.98</div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="summary-item">
+                            <div class="item-image">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Lush Lips Gloss">
+                            </div>
+                            <div class="item-info">
+                                <div class="item-name">Lush Lips Gloss - Pink Sparkle</div>
+                                <div class="item-details">Quantity: 1 | Shade: Pink Sparkle</div>
+                            </div>
+                            <div class="item-price">£18.99</div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="summary-item">
+                            <div class="item-image">
+                                <img src="https://images.unsplash.com/photo-1604658244477-623b31c87fd5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Luxury Press-on Nails">
+                            </div>
+                            <div class="item-info">
+                                <div class="item-name">Luxury Press-on Nails</div>
+                                <div class="item-details">Quantity: 1 | Style: Midnight Glam</div>
+                            </div>
+                            <div class="item-price">£29.99</div>
+                        </div>
+                    </div>
+
+                    <!-- Update these lines in payment.html -->
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span class="total-label">Subtotal</span>
+                        <span class="total-value" id="subtotal-value">£0.00</span> <!-- Added id -->
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Shipping</span>
+                        <span class="total-value">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Tax (VAT)</span>
+                        <span class="total-value" id="tax-value">£0.00</span> <!-- Added id -->
+                    </div>
+                </div>
+
+                <div class="grand-total">
+                    <span class="total-label">Total (GBP)</span>
+                    <span class="total-value" id="order-total">£0.00</span>
+                </div>
+
+                <button class="payment-button" id="pay-now">
+                    <i class="fas fa-lock"></i>
+                    <span id="pay-amount">Pay £0.00</span> <!-- Added id -->
+                </button>
+
+                            
+
+                    <p class="payment-note">By completing your purchase, you agree to our Terms of Service and Privacy Policy</p>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BatLuxe Beauty</h3>
+                    <p>Luxury beauty products crafted with precision and passion for the modern woman.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/batluxebeautyuk"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@batluxebeautyuk"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="profile.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="shippingandreturns.html">Shipping & Returns</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="term.condition.html">Terms & Conditions</a></li>
+                        <li><a href="faq-question.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BatLuxe Beauty. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="modal-title">Payment Successful!</h2>
+            <p class="modal-message">Thank you for your order. Your payment has been processed successfully. Order confirmation has been sent to your email.</p>
+            <div class="modal-buttons">
+                <button class="modal-primary" onclick="window.location.href='orders.html'">View Order</button>
+                <button class="modal-secondary" onclick="window.location.href='index.html'">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    
+      </body>
+</html>

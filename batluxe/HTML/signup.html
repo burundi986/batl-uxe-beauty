@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BatLuxe Beauty</title>
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/auth.css">
+    <script src="../JAVA SCRIPT/auth.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Bat<span>Luxe</span> Beauty</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="index.html"><i class="fas fa-home"></i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sign Up Form -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>Create Account</h2>
+                    <p>Join BatLuxe Beauty for exclusive offers</p>
+                </div>
+                
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" required placeholder="Enter your full name">
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" required placeholder="Enter your email">
+                        <div class="error-message" id="signupEmailError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="signupPassword" required placeholder="Create a password">
+                            <button type="button" class="toggle-password" id="toggleSignupPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-requirements">
+                            <p>Password must contain:</p>
+                            <ul>
+                                <li id="lengthReq">At least 8 characters</li>
+                                <li id="uppercaseReq">One uppercase letter</li>
+                                <li id="lowercaseReq">One lowercase letter</li>
+                                <li id="numberReq">One number</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" required placeholder="Confirm your password">
+                        <div class="error-message" id="confirmPasswordError"></div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" id="acceptTerms" required>
+                            <span>I agree to the <a href="term.condition.html">Terms & Conditions</a> and <a href="PRIVACY-POLICY.HTML">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn auth-btn">Create Account</button>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html" class="auth-link">Sign in here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Account created successfully!
+    </div>
+
+    <script src="../JAVA SCRIPT/auth.js" defer></script>
+</body>
+</html>

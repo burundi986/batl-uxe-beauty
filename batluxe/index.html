@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bat-luxe beauty</title>
+    <script src="../JAVA SCRIPT/index.JS" defer></script>
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Bat<span>Luxe</span> Beauty</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../batluxe/HTML/shop.html">Shop</a></li>
+                    <li><a href="../batluxe/HTML/about.html">About</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    
+                </ul>
+        </div>
+
+                <div class="nav-icons">
+                    <div class="cart-icon" id="cartIcon">
+                    </div>
+                    <a href="../PROFILE.html"><i class="fas fa-user"></i></a>
+                    <div class="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+             <div class="nav-icons">
+                    <div class="cart-icon" id="cartIcon">
+                        <!-- Your cart icon content -->
+                    </div>
+                    <!-- User icon will be dynamically updated by auth.js -->
+                    <a href="../login.html"><span>login</span></a>
+                     <a href="../signup.html"><span>sign up</span></a>
+                    <div class="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Luxury Beauty, Elevated</h1>
+                In Your Own Luxury</p>
+                <a href="../bat-luxe-beauty-main/HTML/login.html" class="btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="countdown">
+          <div class="countdown" aria-hidden="false" id="countdown">
+            <div class="unit"><div class="num" id="days">00</div><div class="label">Days</div></div>
+            <div class="unit"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
+            <div class="unit"><div class="num" id="minutes">00</div><div class="label">Minutes</div></div>
+            <div class="unit"><div class="num" id="seconds">00</div><div class="label">Seconds</div></div>
+          </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Products</h2>
+                <p>Discover our best-selling beauty essentials</p>
+            </div>
+            <div class="products-grid">
+                    <!-- Product 1 -->
+                
+                       <div class="product-card">
+                        <img src="../N015.jpg" alt="NAIL" class="product-img">
+                        <div class="product-info">
+                            <div class="product-category">Press on Nails</div>
+                            <h3 class="product-name">Blush Marble Elegance-long coffin press-on nails</h3>
+                            <div class="product-price" data-original-price="10.00">£10.00</div>
+                            <details>
+                               A soft, feminine blend of blush pink and luxury marble accents.
+                                This set gives you that classy, rich-auntie vibe with a touch of glam — perfect for date nights, photoshoots, events, or your everyday soft-girl look.
+                            </details>
+
+                            <div class="product-actions">
+                                <a href="press on nails.html"><button class="btn add-to-cart-btn">Shop now</button></a>
+                            </div>
+                        </div>
+                    </div>
+                              
+                  <!-- Product 2 -->
+                    <div class="product-card">
+                        <img src="../LL002.jpg" alt="lip liner - black" class="product-img">
+                        <div class="product-info">
+                            <div class="product-category">lip liner</div>
+                            <h3 class="product-name">Batluxe Beauty Lip Liner - classic black Collection</h3>
+                            <div class="product-price" data-original-price="5.99">£5.99</div>
+                            <details>Luxurious, durable and perfect for your glosses. This Batluxe Beauty lip gloss box gives your products a premium, classy finish—sleek, girly and ready for retail.</details>
+                            <div class="product-actions">
+                                 <a href="press on nails.html"><button class="btn add-to-cart-btn">Shop now</button></a>
+
+                            </div>
+                        </div>
+                    </div>
+
+  
+ 
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Shopping Cart</h2>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+            <p class="empty-cart-message" id="emptyCartMessage">Your cart is empty</p>
+        </div>
+        
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">£0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery Fee</span>
+                <span id="deliveryFee">£0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="total">£0.00</span>
+            </div>
+            
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Item added to cart successfully!
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BatLuxe Beauty</h3>
+                    <p>Glow In Your Own Luxury</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/batluxebeautyuk?igsh=MThxdTV4ZXB2cDd3aw%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@batluxebeautyuk?_r=1&_t=ZN-91Z0W4zfwTW"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../shop.html">Shop</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="../SHIPPINGANDRETURNS.HTML">Shipping & Returns</a></li>
+                        <li><a href="../PRIVACY-POLICY.HTML">Privacy Policy</a></li>
+                        <li><a href="../term.condition.html">Terms & Conditions</a></li>
+                        <li><a href="../faq-question.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BatLuxe Beauty. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

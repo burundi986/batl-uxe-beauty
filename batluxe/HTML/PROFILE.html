@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - BatLuxe Beauty</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #f410dd;
+            --primary-dark: #9333ea;
+            --secondary-color: #f0abfc;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --light-bg: #f9fafb;
+            --white: #ffffff;
+            --border-color: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cart-icon, .wishlist-icon, .user-icon {
+            position: relative;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .wishlist-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #f3e8ff 0%, #f0f9ff 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar */
+        .dashboard-sidebar {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .user-profile {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-email {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .user-membership {
+            background-color: var(--light-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .dashboard-menu {
+            margin-bottom: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-dark);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            background-color: var(--light-bg);
+        }
+
+        .menu-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .notification-count {
+            position: absolute;
+            right: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .menu-item.active .notification-count {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--white);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--light-bg);
+            border-color: var(--text-light);
+        }
+
+        /* Main Content */
+        .dashboard-content {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .content-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-bg);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Wishlist Grid */
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wishlist-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            background-color: var(--white);
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .wishlist-item:hover .item-image img {
+            transform: scale(1.05);
+        }
+
+        .item-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .remove-btn:hover {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .item-details {
+            padding: 1.5rem;
+        }
+
+        .item-category {
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .item-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .item-stock {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .in-stock {
+            color: var(--success);
+        }
+
+        .in-stock .stock-dot {
+            background-color: var(--success);
+        }
+
+        .low-stock {
+            color: var(--warning);
+        }
+
+        .low-stock .stock-dot {
+            background-color: var(--warning);
+        }
+
+        .out-of-stock {
+            color: var(--danger);
+        }
+
+        .out-of-stock .stock-dot {
+            background-color: var(--danger);
+        }
+
+        /* Addresses Section */
+        .addresses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .address-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            background-color: var(--white);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .address-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .address-card.default {
+            border-color: var(--primary-color);
+            background-color: rgba(168, 85, 247, 0.05);
+        }
+
+        .address-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .address-type {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .default-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .address-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .address-details p {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Settings Section */
+        .settings-form {
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            margin-top: 2rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .activity-details p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-column p {
+            color: var(--gray-300);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-form button {
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-300);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .content-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .addresses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header {
+                padding: 2rem 0;
+            }
+
+            .dashboard-sidebar, .dashboard-content {
+                padding: 1.5rem;
+            }
+
+            .address-card {
+                padding: 1rem;
+            }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1001;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.error {
+            background-color: var(--danger);
+        }
+
+        .notification.warning {
+            background-color: var(--warning);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Bat<span>Luxe</span> Beauty</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="profile.html">My Account</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">3</span>
+                    </a>
+                    <a href="wishlist.html" class="wishlist-icon">
+                        <i class="fas fa-heart"></i>
+                        <span class="wishlist-count">12</span>
+                    </a>
+                    <a href="profile.html" class="user-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>My Dashboard</h1>
+            <p>Manage your wishlist, addresses, and account settings</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-container">
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-name">Basit Yusuf</div>
+                        <div class="user-email">basityusuf365@gmail.com</div>
+                        <div class="user-membership">Premium Member</div>
+                    </div>
+
+                    <div class="dashboard-menu">
+                        <a href="wishlist.html" class="menu-item active" data-target="wishlist">
+                            <i class="fas fa-heart"></i>
+                            <span>My Wishlist</span>
+                            <span class="notification-count">12</span>
+                        </a>
+                        <a href="orders.html" class="menu-item" data-target="orders">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>My Orders</span>
+                            <span class="notification-count">3</span>
+                        </a>
+                        <a href="profile.html#addresses" class="menu-item" data-target="addresses">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>My Addresses</span>
+                        </a>
+                        <a href="profile.html#settings" class="menu-item" data-target="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </div>
+
+                    <button class="logout-btn" onclick="window.location.href='auth.html'">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </button>
+                </div>
+
+                <!-- Main Content -->
+                <div class="dashboard-content">
+                    <!-- Wishlist Section -->
+                    <div class="content-section active" id="wishlist">
+                        <div class="content-header">
+                            <h2>My Wishlist</h2>
+                            <div class="wishlist-actions">
+                                <button class="btn" id="add-all-to-cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>Add All to Cart</span>
+                                </button>
+                                <button class="btn btn-outline" id="clear-wishlist">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Clear Wishlist</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="recent-activity">
+                            <h3>Recent Wishlist Activity</h3>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Item Added to Wishlist</h4>
+                                    <p>Lush Lips Gloss - Pink Sparkle added on October 15, 2024</p>
+                                    <span class="activity-time">Today, 14:30</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Item Added to Wishlist</h4>
+                                    <p>BatLuxe Feline Lashes added on October 14, 2024</p>
+                                    <span class="activity-time">Yesterday, 10:15</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Item Added to Wishlist</h4>
+                                    <p>Luxury Press-on Nails added on October 12, 2024</p>
+                                    <span class="activity-time">3 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Wishlist Items -->
+                        <div class="wishlist-grid" id="wishlist-items">
+                            <!-- Item 1 -->
+                            <div class="wishlist-item" data-category="lips" data-price="18.99" data-date="2024-10-15">
+                                <div class="item-image">
+                                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Lush Lips Gloss">
+                                    <div class="item-actions">
+                                        <button class="action-btn remove-btn" title="Remove from wishlist">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="action-btn cart-btn" title="Add to cart">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="item-details">
+                                    <div class="item-category">Lip Products</div>
+                                    <h3 class="item-name">Lush Lips Gloss - Pink Sparkle</h3>
+                                    <div class="item-price">£18.99</div>
+                                    <div class="item-stock in-stock">
+                                        <span class="stock-dot"></span>
+                                        <span>In Stock</span>
+                                    </div>
+                                    <div class="item-added">
+                                        <small>Added: Today, 14:30</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="wishlist-item" data-category="lashes" data-price="24.99" data-date="2024-10-14">
+                                <div class="item-image">
+                                    <img src="https://images.unsplash.com/photo-1583494939362-4c6b63b29e76?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="BatLuxe Feline Lashes">
+                                    <div class="item-actions">
+                                        <button class="action-btn remove-btn" title="Remove from wishlist">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="action-btn cart-btn" title="Add to cart">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="item-details">
+                                    <div class="item-category">Eyelashes</div>
+                                    <h3 class="item-name">BatLuxe Feline Lashes - Natural Black</h3>
+                                    <div class="item-price">£24.99</div>
+                                    <div class="item-stock in-stock">
+                                        <span class="stock-dot"></span>
+                                        <span>In Stock</span>
+                                    </div>
+                                    <div class="item-added">
+                                        <small>Added: Yesterday, 10:15</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="wishlist-item" data-category="nails" data-price="29.99" data-date="2024-10-12">
+                                <div class="item-image">
+                                    <img src="https://images.unsplash.com/photo-1604658244477-623b31c87fd5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Luxury Press-on Nails">
+                                    <div class="item-actions">
+                                        <button class="action-btn remove-btn" title="Remove from wishlist">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="action-btn cart-btn" title="Add to cart">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="item-details">
+                                    <div class="item-category">Nail Products</div>
+                                    <h3 class="item-name">Luxury Press-on Nails - Midnight Glam</h3>
+                                    <div class="item-price">£29.99</div>
+                                    <div class="item-stock in-stock">
+                                        <span class="stock-dot"></span>
+                                        <span>In Stock</span>
+                                    </div>
+                                    <div class="item-added">
+                                        <small>Added: 3 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div class="empty-state" id="empty-wishlist" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-heart-broken"></i>
+                            </div>
+                            <h3>Your Wishlist is Empty</h3>
+                            <p>Start adding items you love to your wishlist!</p>
+                            <a href="shop.html" class="btn">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Start Shopping</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Addresses Section -->
+                    <div class="content-section" id="addresses">
+                        <div class="content-header">
+                            <h2>My Addresses</h2>
+                            <a href="profile.html#addresses" class="btn">
+                                <i class="fas fa-plus"></i>
+                                <span>Add New Address</span>
+                            </a>
+                        </div>
+
+                        <div class="addresses-grid">
+                            <!-- Address 1 -->
+                            <div class="address-card default">
+                                <div class="address-header">
+                                    <div class="address-type">Primary Address</div>
+                                    <span class="default-badge">Default</span>
+                                </div>
+                                <div class="address-details">
+                                    <p><strong>Basit Yusuf</strong></p>
+                                    <p>123 Beauty Avenue</p>
+                                    <p>London, E1 6AN</p>
+                                    <p>United Kingdom</p>
+                                    <p><i class="fas fa-phone"></i> +44 (0) 20 7123 4567</p>
+                                </div>
+                                <div class="address-actions">
+                                    <a href="profile.html#addresses" class="btn btn-small">Edit</a>
+                                    <button class="btn btn-small btn-outline remove-address">Remove</button>
+                                </div>
+                            </div>
+
+                            <!-- Address 2 -->
+                            <div class="address-card">
+                                <div class="address-header">
+                                    <div class="address-type">Work Address</div>
+                                </div>
+                                <div class="address-details">
+                                    <p><strong>Basit Yusuf</strong></p>
+                                    <p>456 Glamour Street, Suite 200</p>
+                                    <p>Manchester, M1 1AB</p>
+                                    <p>United Kingdom</p>
+                                    <p><i class="fas fa-phone"></i> +44 (0) 161 987 6543</p>
+                                </div>
+                                <div class="address-actions">
+                                    <a href="profile.html#addresses" class="btn btn-small">Edit</a>
+                                    <button class="btn btn-small btn-outline remove-address">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div class="empty-state" id="empty-addresses" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>No Addresses Saved</h3>
+                            <p>Add your addresses for faster checkout!</p>
+                            <a href="profile.html#addresses" class="btn">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Address</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Settings Section -->
+                    <div class="content-section" id="settings">
+                        <div class="content-header">
+                            <h2>Account Settings</h2>
+                        </div>
+
+                        <form class="settings-form" id="accountSettingsForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" class="form-control" value="Basit" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" class="form-control" value="Yusuf" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" value="basityusuf365@gmail.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" value="+44 (0) 20 7123 4567" required>
+                            </div>
+
+                            <div class="form-section-header">
+                                <h3>Change Password</h3>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password">
+                                    <button type="button" class="password-toggle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <div class="password-input">
+                                        <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+                                        <button type="button" class="password-toggle">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <div class="password-input">
+                                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
+                                        <button type="button" class="password-toggle">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn">Save Changes</button>
+                                <button type="button" class="btn btn-outline" id="discardChanges">Discard Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BatLuxe Beauty</h3>
+                    <p>Luxury beauty products crafted with precision and passion for the modern woman.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/batluxebeautyuk"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@batluxebeautyuk"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="profile.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="shippingandreturns.html">Shipping & Returns</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="term.condition.html">Terms & Conditions</a></li>
+                        <li><a href="faq-question.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for exclusive offers and beauty tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 BatLuxe Beauty. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message"></span>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Dashboard Navigation
+        const menuItems = document.querySelectorAll('.menu-item');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all menu items and sections
+                menuItems.forEach(i => i.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to clicked menu item
+                item.classList.add('active');
+                
+                // Show corresponding content section
+                const target = item.getAttribute('data-target');
+                const targetElement = document.getElementById(target);
+                if (targetElement) {
+                    targetElement.classList.add('active');
+                }
+            });
+        });
+
+        // Wishlist Functionality
+        const wishlistItemsContainer = document.getElementById('wishlist-items');
+        const wishlistItems = Array.from(wishlistItemsContainer.children);
+        const emptyWishlistState = document.getElementById('empty-wishlist');
+        const wishlistCountElement = document.querySelector('.wishlist-count');
+        const cartCountElement = document.querySelector('.cart-count');
+        const addAllToCartBtn = document.getElementById('add-all-to-cart');
+        const clearWishlistBtn = document.getElementById('clear-wishlist');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+
+        // Update wishlist count
+        function updateWishlistCount() {
+            const visibleItems = Array.from(wishlistItemsContainer.children).filter(item => 
+                item.style.display !== 'none'
+            ).length;
+            
+            wishlistCountElement.textContent = visibleItems;
+            
+            // Show/hide empty state
+            if (visibleItems === 0) {
+                emptyWishlistState.style.display = 'block';
+            } else {
+                emptyWishlistState.style.display = 'none';
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            notificationMessage.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add('show', type);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Remove item from wishlist
+        function removeItem(itemElement) {
+            itemElement.style.opacity = '0';
+            itemElement.style.transform = 'scale(0.9)';
+            
+            setTimeout(() => {
+                itemElement.style.display = 'none';
+                updateWishlistCount();
+                showNotification('Item removed from wishlist');
+            }, 300);
+        }
+
+        // Add item to cart
+        function addToCart(itemElement) {
+            const itemName = itemElement.querySelector('.item-name').textContent;
+            let cartCount = parseInt(cartCountElement.textContent);
+            cartCountElement.textContent = cartCount + 1;
+            
+            showNotification(`${itemName} added to cart`);
+        }
+
+        // Add all to cart
+        addAllToCartBtn.addEventListener('click', () => {
+            const visibleItems = Array.from(wishlistItemsContainer.children).filter(item => 
+                item.style.display !== 'none'
+            );
+            
+            if (visibleItems.length === 0) {
+                showNotification('No items available to add to cart', 'warning');
+                return;
+            }
+            
+            let cartCount = parseInt(cartCountElement.textContent);
+            cartCountElement.textContent = cartCount + visibleItems.length;
+            
+            showNotification(`${visibleItems.length} items added to cart`);
+        });
+
+        // Clear wishlist
+        clearWishlistBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear your entire wishlist?')) {
+                const visibleItems = Array.from(wishlistItemsContainer.children).filter(item => 
+                    item.style.display !== 'none'
+                );
+                
+                visibleItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.9)';
+                        
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                            if (index === visibleItems.length - 1) {
+                                updateWishlistCount();
+                                showNotification('Wishlist cleared');
+                            }
+                        }, 300);
+                    }, index * 100);
+                });
+            }
+        });
+
+        // Event delegation for wishlist actions
+        wishlistItemsContainer.addEventListener('click', (e) => {
+            const itemElement = e.target.closest('.wishlist-item');
+            
+            // Remove button
+            if (e.target.closest('.remove-btn')) {
+                removeItem(itemElement);
+            }
+            
+            // Add to cart button
+            if (e.target.closest('.cart-btn')) {
+                addToCart(itemElement);
+            }
+        });
+// Load wishlist data
+async function loadWishlist() {
+    try {
+        const wishlist = await ApiService.getWishlist();
+        displayWishlistItems(wishlist);
+        updateWishlistCount(wishlist);
+    } catch (error) {
+        ApiService.handleError(error);
+    }
+}
+
+// Add to wishlist function
+async function addToWishlist(productId) {
+    try {
+        await ApiService.addToWishlist(productId);
+        showNotification('Added to wishlist!');
+        loadWishlist(); // Refresh the wishlist
+    } catch (error) {
+        ApiService.handleError(error);
+    }
+}
+
+// Remove from wishlist function
+async function removeFromWishlist(wishlistItemId) {
+    try {
+        await ApiService.removeFromWishlist(wishlistItemId);
+        showNotification('Removed from wishlist!');
+        loadWishlist(); // Refresh the wishlist
+    } catch (error) {
+        ApiService.handleError(error);
+    }
+}
+        // Address Functionality
+        const addressCards = document.querySelectorAll('.address-card');
+        const emptyAddressState = document.getElementById('empty-addresses');
+        const removeAddressButtons = document.querySelectorAll('.remove-address');
+
+        // Update address display
+        function updateAddressDisplay() {
+            const visibleAddresses = Array.from(addressCards).filter(card => 
+                card.style.display !== 'none'
+            ).length;
+            
+            if (visibleAddresses === 0) {
+                emptyAddressState.style.display = 'block';
+            } else {
+                emptyAddressState.style.display = 'none';
+            }
+        }
+        
+
+        // Remove address
+        removeAddressButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const addressCard = button.closest('.address-card');
+                
+                if (addressCard.classList.contains('default')) {
+                    showNotification('Cannot remove default address. Please set another address as default first.', 'warning');
+                    return;
+                }
+                
+                if (confirm('Are you sure you want to remove this address?')) {
+                    addressCard.style.opacity = '0';
+                    addressCard.style.transform = 'scale(0.9)';
+                    
+                    setTimeout(() => {
+                        addressCard.style.display = 'none';
+                        updateAddressDisplay();
+                        showNotification('Address removed');
+                    }, 300);
+                }
+            });
+        });
+
+        // Settings Form
+        const settingsForm = document.getElementById('accountSettingsForm');
+        const passwordToggles = document.querySelectorAll('.password-toggle');
+        const discardChangesBtn = document.getElementById('discardChanges');
+
+        // Password visibility toggle
+        passwordToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (input && icon) {
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                }
+            });
+        });
+
+        // Settings form submission
+        settingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Basic validation
+            const newPassword = document.getElementById('newPassword')?.value;
+            const confirmPassword = document.getElementById('confirmPassword')?.value;
+            
+            if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+                showNotification('New password and confirm password do not match.', 'error');
+                return;
+            }
+            
+            showNotification('Account settings updated successfully!');
+        });
+
+        // Discard changes
+        discardChangesBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to discard all changes?')) {
+                settingsForm.reset();
+                showNotification('Changes discarded', 'warning');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateWishlistCount();
+            updateAddressDisplay();
+            
+            // Update year in footer
+            document.querySelector('footer .copyright p').textContent = 
+                document.querySelector('footer .copyright p').textContent.replace('2024', new Date().getFullYear());
+        });
+
+        // Add sample data for demonstration
+        function addSampleWishlistItem() {
+            const sampleItem = `
+                <div class="wishlist-item" data-category="eyes" data-price="34.99" data-date="${new Date().toISOString().split('T')[0]}">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1596703923338-48f1c07e4f2e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Eyeshadow Palette">
+                        <div class="item-actions">
+                            <button class="action-btn remove-btn" title="Remove from wishlist">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="action-btn cart-btn" title="Add to cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-category">Eye Makeup</div>
+                        <h3 class="item-name">Neon Dreams Eyeshadow Palette</h3>
+                        <div class="item-price">£34.99</div>
+                        <div class="item-stock in-stock">
+                            <span class="stock-dot"></span>
+                            <span>In Stock</span>
+                        </div>
+                        <div class="item-added">
+                            <small>Added: Just now</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            wishlistItemsContainer.insertAdjacentHTML('afterbegin', sampleItem);
+            updateWishlistCount();
+            showNotification('Sample item added to wishlist');
+        }
+
+        // Add sample address
+        function addSampleAddress() {
+            const sampleAddress = `
+                <div class="address-card">
+                    <div class="address-header">
+                        <div class="address-type">New Address</div>
+                    </div>
+                    <div class="address-details">
+                        <p><strong>Basit Yusuf</strong></p>
+                        <p>789 Glamour Road</p>
+                        <p>Birmingham, B1 1AA</p>
+                        <p>United Kingdom</p>
+                        <p><i class="fas fa-phone"></i> +44 (0) 121 555 1234</p>
+                    </div>
+                    <div class="address-actions">
+                        <a href="profile.html#addresses" class="btn btn-small">Edit</a>
+                        <button class="btn btn-small btn-outline remove-address">Remove</button>
+                    </div>
+                </div>
+            `;
+            
+            document.querySelector('.addresses-grid').insertAdjacentHTML('beforeend', sampleAddress);
+            updateAddressDisplay();
+            showNotification('Sample address added');
+        }
+        // Load user profile data
+async function loadUserProfile() {
+    try {
+        const userData = await ApiService.getCurrentUser();
+        populateProfileForm(userData);
+    } catch (error) {
+        ApiService.handleError(error);
+    }
+}
+
+// Update user profile
+async function updateUserProfile(formData) {
+    try {
+        const response = await ApiService.updateUser(formData);
+        showNotification('Profile updated successfully!');
+        return response;
+    } catch (error) {
+        ApiService.handleError(error);
+        throw error;
+    }
+}
+        // Uncomment to add sample data for demonstration:
+        // setTimeout(addSampleWishlistItem, 2000);
+        // setTimeout(addSampleAddress, 3000);
+    </script>
+</body>
+</html>
